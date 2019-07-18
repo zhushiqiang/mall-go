@@ -1,0 +1,15 @@
+{
+  "Mode": "debug",
+  "Port": ":9001",
+  "Mysql": {
+    "DataSource": "root:1994Qiang!@(172.16.61.133:3306)/user?charset=utf8",
+    "Table": {
+      "User": "user"
+    }
+  },
+  "Redis": {
+    "DataSource": "172.16.61.133:6379",
+    "Auth": ""
+  },
+  "RabbitMq": "amqp://guest:guest@172.16.61.133:5672/"
+}

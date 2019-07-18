@@ -1,0 +1,23 @@
+{
+  "Mode": "debug",
+  "Port": ":9001",
+  "Mysql": {
+    "DataSource": "root:1994Qiang!@(172.16.61.133:3306)/user?charset=utf8",
+    "Table": {
+      "User": "user"
+    }
+  },
+  "Redis": {
+    "DataSource": "172.16.61.133:6379",
+    "Auth": ""
+  },
+  "RpcServerConfig" : {
+    "Schema": "rpc",
+    "ServerName": "user-rpc",
+    "ServerAddress": ":9090",
+    "Endpoints": [
+      "172.16.61.133:2379",
+      "172.16.61.131:2379"
+    ]
+  }
+}
