@@ -11,5 +11,9 @@
     "DataSource": "172.16.61.133:6379",
     "Auth": ""
   },
-  "RabbitMq": "amqp://guest:guest@172.16.61.133:5672/"
+  "RabbitMq": {
+    "DataSource" : "amqp://guest:guest@172.16.61.133:5672/",
+    "VirtualHost" : "",
+    "QueueName" : ""
+  }
 }
