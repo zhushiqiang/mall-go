@@ -14,7 +14,7 @@
   "RpcServerConfig" : {
     "Schema": "rpc",
     "ServerName": "integral-rpc",
-    "ServerAddress": ":9090",
+    "ServerAddress": ":9092",
     "Endpoints": [
       "172.16.61.133:2379",
       "172.16.61.131:2379"
