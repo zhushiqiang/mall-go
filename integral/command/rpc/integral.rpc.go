@@ -49,14 +49,13 @@ func main() {
 	if err != err{
 		log4g.Info(err)
 	}
+
 	rpcServer, err := grpcx.MustNewGrpcxServer(conf.RpcServerConfig, func(server *grpc.Server) {
 		protos.RegisterIntegralRpcServer(server, integralServerLogic)
 	})
 	if err != nil {
 		log4g.Info(err)
 	}
-
-
 
 	log4g.Error(rpcServer.Run())
 }
