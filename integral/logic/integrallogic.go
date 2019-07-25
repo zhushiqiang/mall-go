@@ -3,7 +3,6 @@ package logic
 import (
 	"github.com/streadway/amqp"
 	"github.com/yakaa/log4g"
-	"log"
 	"mall-go/integral/model"
 	"mall-go/integral/protos"
 	"context"
@@ -27,7 +26,7 @@ func NewIntegralLogic(dataSource, QueueName string, integralModel *model.Integra
 }
 
 func (l *Integrallogic) CreateDial() error  {
-	conn, err := amqp.Dial(l.dialHost + l.queueName)
+	conn, err := amqp.Dial(l.dialHost)
 
 	if err != nil {
 		return err
@@ -37,7 +36,7 @@ func (l *Integrallogic) CreateDial() error  {
 }
 
 func (l *Integrallogic) CloseRabbitMqConn()  {
-	if err:= l.rabbitMqConn.Close();err != nil {
+	if err := l.rabbitMqConn.Close();err != nil {
 		log4g.ErrorFormat("CloseRabbitMqConn err %+v", err)
 	}
 }
@@ -67,13 +66,13 @@ func (l *Integrallogic) PushMessage(message string)  {
 		})
 }
 
-func (l *Integrallogic) ConsumeMessage(message string)  {
+func (l *Integrallogic) ConsumeMessage()  {
 	ch, err := l.rabbitMqConn.Channel()
-	defer func() {
-		if err:= ch.Close();err != nil {
-			log4g.ErrorFormat("CloseChConn err %+v", err)
-		}
-	}()
+	//defer func() {
+	//	if err:= ch.Close();err != nil {
+	//		log4g.ErrorFormat("CloseChConn err %+v", err)
+	//	}
+	//}()
 	if err !=nil {
 		log4g.ErrorFormat("ConsumeMessage err %+v", err)
 	}
@@ -83,7 +82,7 @@ func (l *Integrallogic) ConsumeMessage(message string)  {
 		log4g.ErrorFormat("ConsumeMessage err %+v", err)
 		return
 	}
-	msgs, err := ch.Consume(
+	messageList, err := ch.Consume(
 		q.Name, // queue
 		"",     // consumer
 		true,   // auto-ack
@@ -97,7 +96,7 @@ func (l *Integrallogic) ConsumeMessage(message string)  {
 		log4g.ErrorFormat("ch.Consume err %+v", err)
 	}
 	go func() {
-		for d := range msgs  {
+		for d := range messageList  {
 			msg := d.Body;
 			//log.Printf("Received a message: %s", d.Body)
 			if err := l.integralModel.ExecSql(string(msg)); err != nil {

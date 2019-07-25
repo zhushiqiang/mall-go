@@ -38,7 +38,7 @@ func main() {
 
 	engine, err := xorm.NewEngine("mysql", conf.Mysql.DataSource)
 
-	if err != err{
+	if err != nil{
 		log4g.Info(err)
 	}
 

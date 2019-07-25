@@ -21,8 +21,8 @@
     ]
   },
   "RabbitMq": {
-    "DataSource" : "amqp://guest:guest@172.16.61.133:5672/",
-    "VirtualHost" : ""，,
+    "DataSource" : "amqp://admin:admin@172.16.61.133:5672/",
+    "VirtualHost" : "admin",
     "QueueName" : "integral"
   }
 }
